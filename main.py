@@ -117,3 +117,12 @@ for username in followers:
         api_base_url + f"/user/following/{username}", headers=headers
     )
     response.raise_for_status()
+    response = requests.get(
+        api_base_url + f"/user/following/{username}", headers=headers
+    )
+    if response.status_code == 404:
+        print(
+            f"Failed to follow {username}, maybe https://github.com/{username} is a private GitHub profile?"
+        )
+    else:
+        response.raise_for_status()
