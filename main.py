@@ -101,6 +101,7 @@ print(f"Following: {len(following)}")
 for username in following:
     if username in followers:
         continue
+    print(f"Unfollowing {username}")
     response = requests.delete(
         api_base_url + f"/user/following/{username}", headers=headers
     )
@@ -111,6 +112,7 @@ headers["Content-Length"] = "0"
 for username in followers:
     if username in following:
         continue
+    print(f"Following {username}")
     response = requests.put(
         api_base_url + f"/user/following/{username}", headers=headers
     )
