@@ -107,6 +107,7 @@ for username in following:
     response.raise_for_status()
 
 # Follow followers
+headers["Content-Length"] = "0"
 for username in followers:
     if username in following:
         continue
