@@ -117,6 +117,8 @@ for username in followers:
         api_base_url + f"/user/following/{username}", headers=headers
     )
     response.raise_for_status()
+
+    # Check if follow was successful
     response = requests.get(
         api_base_url + f"/user/following/{username}", headers=headers
     )
