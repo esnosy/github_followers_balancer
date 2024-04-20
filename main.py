@@ -56,17 +56,16 @@ for user in json_response:
 while True:
     link_rels = parse_link_rels(response.headers)
     next_url = link_rels.get("next", None)
-    if next_url is not None:
-        response = requests.get(next_url, headers=headers)
-        response.raise_for_status()
-        json_response = response.json()
-        # TODO: reduce code duplication
-        for user in json_response:
-            username = user["login"]
-            assert username not in followers
-            followers.add(username)
-    else:
+    if next_url is None:
         break
+    response = requests.get(next_url, headers=headers)
+    response.raise_for_status()
+    json_response = response.json()
+    # TODO: reduce code duplication
+    for user in json_response:
+        username = user["login"]
+        assert username not in followers
+        followers.add(username)
 
 print(f"Followers: {len(followers)}")
 
@@ -87,17 +86,16 @@ for user in json_response:
 while True:
     link_rels = parse_link_rels(response.headers)
     next_url = link_rels.get("next", None)
-    if next_url is not None:
-        response = requests.get(next_url, headers=headers)
-        response.raise_for_status()
-        json_response = response.json()
-        # TODO: reduce code duplication
-        for user in json_response:
-            username = user["login"]
-            assert username not in following
-            following.add(username)
-    else:
+    if next_url is None:
         break
+    response = requests.get(next_url, headers=headers)
+    response.raise_for_status()
+    json_response = response.json()
+    # TODO: reduce code duplication
+    for user in json_response:
+        username = user["login"]
+        assert username not in following
+        following.add(username)
 
 print(f"Following: {len(following)}")
 
