@@ -1,10 +1,14 @@
-import os
 from typing import Mapping
+from argparse import ArgumentParser
 
 import requests
 
+parser = ArgumentParser()
+parser.add_argument('--token', type=str, required=True)
+args = parser.parse_args()
+
 api_base_url = "https://api.github.com"
-token = os.environ["GH_TOKEN"]
+token = args.token
 
 
 def parse_link_rels(headers: Mapping[str, str]) -> dict[str, str]:
